@@ -33,7 +33,7 @@ export class Tab1Page implements OnInit {
   // Lee el fichero con los artículos y los guarda en el array "listaNoticias"
   private cargarFichero() {
 
-    let respuesta: Observable<RespuestaNoticias> = this.leerFichero.get<RespuestaNoticias>("/assets/datos/articulos.json");
+    let respuesta: Observable<RespuestaNoticias> = this.leerFichero.get<RespuestaNoticias>("https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=16f4eb2387ad4e2c87d6446955003469");
 
     respuesta.subscribe( resp => {
       console.log("Noticias", resp);

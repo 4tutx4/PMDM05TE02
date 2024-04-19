@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Article } from './../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 
@@ -13,6 +14,7 @@ export class GestionNoticiasLeerService {
   }
 
   // Añade una nueva noticia a leer
+  // api key 16f4eb2387ad4e2c87d6446955003469
   addNoticia(item : Article) {
     // copiar item
     let itemString = JSON.stringify(item);
