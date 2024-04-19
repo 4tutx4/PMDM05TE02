@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Article } from './../interfaces/interfaces';
 import { Injectable } from '@angular/core';
+import { GestionStorageService } from './gestion-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,14 @@ export class GestionNoticiasLeerService {
 
   private noticiasLeer: Article [] = [];
 
-  constructor() {
-
+  constructor(private gestion:GestionStorageService) {
+    let promesa: Promise<Article[]>=this.gestion.getObject("noticias");
+    promesa.then(datos=>{
+      this.noticiasLeer.push(...datos);      
+    });
   }
 
   // Añade una nueva noticia a leer
-  // api key 16f4eb2387ad4e2c87d6446955003469
   addNoticia(item : Article) {
     // copiar item
     let itemString = JSON.stringify(item);
@@ -23,6 +26,7 @@ export class GestionNoticiasLeerService {
     // Añadirlo
     this.noticiasLeer.push(item);
     // console.log(this.noticiasLeer);
+    this.gestion.setObject("noticias",this.noticiasLeer);
   }
 
   // Comprueba si una noticia ya está en el array
@@ -41,7 +45,9 @@ export class GestionNoticiasLeerService {
     let indice = this.buscar(item);
     if (indice != -1) {
       this.noticiasLeer.splice(indice, 1);
-      // console.log(this.noticiasLeer); 
+      // console.log(this.noticiasLeer);
+      this.gestion.removeItem("noticias");
+      this.gestion.setObject("noticias",this.noticiasLeer); 
     }
   }
 

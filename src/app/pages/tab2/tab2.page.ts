@@ -1,6 +1,7 @@
 import { GestionNoticiasLeerService } from './../../services/gestion-noticias-leer.service';
 import { Article } from './../../interfaces/interfaces';
 import { Component } from '@angular/core';
+import { GestionStorageService } from 'src/app/services/gestion-storage.service';
 
 @Component({
   selector: 'app-tab2',
@@ -13,7 +14,6 @@ export class Tab2Page {
   listaNoticias: Article[] = [];
 
   constructor(public gestionNoticiasLeer: GestionNoticiasLeerService) {
-
   }
 
   
